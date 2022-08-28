@@ -24,6 +24,11 @@
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Username" [formControlName]="'username'">
+          <mat-icon matSuffix
+                    [ngClass]="{'valid': formGroup.get('username')?.valid,
+                     'invalid': formGroup.get('username')?.invalid }"
+                    *ngIf="formGroup.get('username')?.status !== 'PENDING' && formGroup.get('username')?.dirty"
+          >{{ formGroup.get('username')?.valid ? 'check' : 'clear' }}</mat-icon>
           <mat-progress-spinner
             *ngIf="formGroup.get('username')?.status === 'PENDING' && formGroup.get('username')?.dirty"
             color="primary"
@@ -65,8 +70,10 @@
       <div class="row flex-end">
         <button mat-stroked-button color="accent" type="reset">Reset</button>
         <button mat-stroked-button color="primary" type="submit" [disabled]="!formGroup.valid || isLoading">
-          <mat-icon *ngIf="isLoading"><mat-spinner diameter="20">
-          </mat-spinner></mat-icon>
+          <mat-icon *ngIf="isLoading">
+            <mat-spinner diameter="20">
+            </mat-spinner>
+          </mat-icon>
           Sign Up
         </button>
       </div>
