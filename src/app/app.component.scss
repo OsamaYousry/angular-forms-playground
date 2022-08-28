@@ -12,6 +12,9 @@ mat-card {
     margin-right: 20px;
     width: 100%;
   }
+  .w-50 {
+    width: calc(50% - 20px);
+  }
   .mat-radio-button {
     margin-left: 10px;
     margin-bottom: 10px;
@@ -19,7 +22,13 @@ mat-card {
   mat-label {
     margin-left: 10px;
   }
+  button {
+    margin-left: 10px;
+  }
   &.no-space {
     justify-content: start;
+  }
+  &.flex-end {
+    justify-content: flex-end;
   }
 }
