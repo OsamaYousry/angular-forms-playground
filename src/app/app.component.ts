@@ -68,7 +68,7 @@ export class AppComponent {
   }
 
   signup() {
-    let model: SignupModel = this.formGroup.value;
+    let {confirmPassword, ...model} = this.formGroup.value as SignupModel & {confirmPassword: string};
     console.log(model);
     this.isLoading = true;
     of(null).pipe(delay(2000)).subscribe(() => {
