@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {passwordMatchValidator, birthdayValidator, passwordComplexityValidator, usernameValidator} from './validators';
+import {SignupModel} from './models/signup.model';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ export class AppComponent {
       confirmPassword: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       dob: ['', [Validators.required, birthdayValidator]],
-    }, {validator: passwordMatchValidator});
+    }, {validators: passwordMatchValidator});
   }
 
   getErrorMessage(control: AbstractControl | null) {
@@ -59,5 +60,10 @@ export class AppComponent {
       }
     }
     return '';
+  }
+
+  signup() {
+    let model: SignupModel = this.formGroup.value;
+    console.log(model);
   }
 }
