@@ -1,15 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {passwordMatchValidator, birthdayValidator, passwordComplexityValidator, usernameValidator} from './validators';
 import {SignupModel} from './models/signup.model';
-import {delay, of} from 'rxjs';
+import {delay, map, of} from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   formGroup: FormGroup;
   isLoading: boolean = false;
 
@@ -23,7 +23,15 @@ export class AppComponent {
       confirmPassword: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       dob: ['', [Validators.required, birthdayValidator]],
+      age: [{value: '', disabled: true}]
     }, {validators: passwordMatchValidator});
+  }
+
+  ngOnInit() {
+    this.formGroup.controls['dob'].valueChanges.pipe(
+      map(dob => new Date().getFullYear() - new Date(dob).getFullYear()),
+      map(age => age > 5 ? age : null)
+    ).subscribe(age => this.formGroup.controls['age'].setValue(age));
   }
 
   getErrorMessage(control: AbstractControl | null) {
@@ -68,7 +76,7 @@ export class AppComponent {
   }
 
   signup() {
-    let {confirmPassword, ...model} = this.formGroup.value as SignupModel & {confirmPassword: string};
+    let {confirmPassword, ...model} = this.formGroup.value as SignupModel & { confirmPassword: string };
     console.log(model);
     this.isLoading = true;
     of(null).pipe(delay(2000)).subscribe(() => {
