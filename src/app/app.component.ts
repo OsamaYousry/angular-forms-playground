@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {passwordMatchValidator, birthdayValidator, passwordComplexityValidator, usernameValidator} from './validators';
 import {SignupModel} from './models/signup.model';
+import {delay, of} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import {SignupModel} from './models/signup.model';
 })
 export class AppComponent {
   formGroup: FormGroup;
+  isLoading: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.formGroup = this.fb.group({
@@ -57,6 +59,9 @@ export class AppComponent {
         if (control.errors['usernameIsForbidden']) {
           return 'Username is forbidden';
         }
+        if (control.errors['emailIsForbidden']) {
+          return 'This email is already in use';
+        }
       }
     }
     return '';
@@ -65,5 +70,10 @@ export class AppComponent {
   signup() {
     let model: SignupModel = this.formGroup.value;
     console.log(model);
+    this.isLoading = true;
+    of(null).pipe(delay(2000)).subscribe(() => {
+      this.isLoading = false;
+      this.formGroup.controls['email'].setErrors({'emailIsForbidden': true});
+    });
   }
 }

@@ -61,7 +61,11 @@
       </div>
       <div class="row flex-end">
         <button mat-stroked-button color="accent" type="reset">Reset</button>
-        <button mat-stroked-button color="primary" type="submit" [disabled]="!formGroup.valid">Sign Up</button>
+        <button mat-stroked-button color="primary" type="submit" [disabled]="!formGroup.valid || isLoading">
+          <mat-icon *ngIf="isLoading"><mat-spinner diameter="20">
+          </mat-spinner></mat-icon>
+          Sign Up
+        </button>
       </div>
     </form>
   </mat-card-content>

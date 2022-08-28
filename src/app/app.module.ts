@@ -13,6 +13,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers: [{
     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}
