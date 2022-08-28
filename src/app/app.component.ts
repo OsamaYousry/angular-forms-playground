@@ -29,8 +29,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.formGroup.controls['dob'].valueChanges.pipe(
-      map(dob => new Date().getFullYear() - new Date(dob).getFullYear()),
-      map(age => age > 5 ? age : null)
+      map(dob => (new Date().getTime() - new Date(dob).getTime()) / 1000 / 60 / 60 / 24 / 365),
+      map(age => Math.floor(age)),
+      map(age => this.formGroup.controls['dob'].valid ? age : null),
     ).subscribe(age => this.formGroup.controls['age'].setValue(age));
   }
 
