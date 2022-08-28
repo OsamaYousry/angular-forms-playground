@@ -8,7 +8,11 @@ export function passwordMatchValidator(control: AbstractControl): { [key: string
       confirmPassword.setErrors({mismatch: true});
       return {'mismatch': true};
     } else {
-      confirmPassword.setErrors(null);
+      let errors = confirmPassword.errors;
+      if (errors && errors['mismatch']) {
+        delete errors['mismatch'];
+      }
+      confirmPassword.setErrors(errors);
       return null;
     }
   }
