@@ -85,4 +85,26 @@ export class AppComponent implements OnInit {
       this.formGroup.controls['email'].setErrors({'emailIsForbidden': true});
     });
   }
+
+  fillForm() {
+    this.formGroup.patchValue({
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@email.com',
+      username: 'johndoe',
+      password: 'Password1',
+      confirmPassword: 'Password1',
+      dob: new Date(1990, 1, 1),
+    });
+    this.markAllAsTouched(this.formGroup);
+  }
+
+  markAllAsTouched(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(key => {
+      formGroup.get(key)!.markAsTouched();
+      if (formGroup.get(key) instanceof FormGroup) {
+        this.markAllAsTouched(formGroup.get(key) as FormGroup);
+      }
+    });
+  }
 }

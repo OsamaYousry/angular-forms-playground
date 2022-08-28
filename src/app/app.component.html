@@ -69,6 +69,7 @@
       </div>
       <div class="row flex-end">
         <button mat-stroked-button color="accent" type="reset">Reset</button>
+        <button mat-stroked-button color="accent" (click)="fillForm()" type="button">Fill Form</button>
         <button mat-stroked-button color="primary" type="submit" [disabled]="!formGroup.valid || isLoading">
           <mat-icon *ngIf="isLoading">
             <mat-spinner diameter="20">
