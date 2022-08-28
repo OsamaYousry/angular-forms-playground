@@ -1,10 +1,15 @@
 import {AbstractControl} from '@angular/forms';
-import {delay, mapTo, Observable, of} from 'rxjs';
+import {delay, Observable, of, switchMap, tap} from 'rxjs';
 
 export function usernameValidator(control: AbstractControl): Observable<{ [key: string]: boolean } | null> {
   control.markAsTouched();
-  return of(null).pipe(
-    mapTo(control.value === 'test' ? {'usernameIsForbidden': true} : null),
-    delay(2000)
+  return of(control.value).pipe(
+    delay(500),
+    switchMap(value => {
+      return of(value === 'test' ? {'usernameIsForbidden': true} : null).pipe(
+        tap(() => console.log('FIRED')),
+        delay(2000)
+      );
+    }),
   );
 }
