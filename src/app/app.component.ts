@@ -76,7 +76,11 @@ export class AppComponent implements OnInit {
   }
 
   signup() {
-    let {confirmPassword, ...model} = this.formGroup.value as SignupModel & { confirmPassword: string };
+    let {
+      confirmPassword,
+      age,
+      ...model
+    } = this.formGroup.value as SignupModel & { confirmPassword: string, age: number | string };
     console.log(model);
     this.isLoading = true;
     of(null).pipe(delay(2000)).subscribe(() => {
