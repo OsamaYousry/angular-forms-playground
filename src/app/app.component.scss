@@ -53,9 +53,4 @@ mat-card {
   input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
   }
-  ::ng-deep.mat-form-field-flex {
-    .mat-form-field-outline {
-      color: #009900;
-    }
-  }
 }
