@@ -1,0 +1,20 @@
+<div class="spinner-container" [style.width]="diameter + 'px'" [style.height]="diameter + 'px'">
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+       xml:space="preserve" x="0px" y="0px"
+       viewBox="0, 0, 100, 100">
+    <g>
+    <g class="spinner">
+    <circle class="path" fill="none" stroke="#7DB0D5" stroke-width="7" stroke-miterlimit="10" stroke-linecap="round"
+            [ngClass]="{'path-complete': status !== 'PENDING', 'success': status === 'VALID', 'danger': status === 'INVALID'}"
+            cx="50" cy="50" r="44"/>
+                                                </g>
+      <polyline class="check" fill="none" stroke="#7DB0D5" stroke-width="8" stroke-linecap="round"
+                [ngClass]="{'check-complete success': status === 'VALID'}"
+                stroke-miterlimit="10" stroke-linejoin="round"
+                points="70,35 45,65 30,52"/>
+      <path class="cross" fill="none" stroke="#7DB0D5" stroke-width="16" stroke-linecap="round" stroke-miterlimit="10"
+            [ngClass]="{'cross-complete danger': status === 'INVALID'}"
+            d="M70,30 l-40,40 M70,70 l-40,-40"/>
+                                            </g>
+                                        </svg>
+</div>

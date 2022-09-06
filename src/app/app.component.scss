@@ -8,39 +8,54 @@ mat-card {
 .row {
   display: flex;
   justify-content: space-between;
+
   .mat-form-field {
     margin-right: 20px;
     width: 100%;
   }
+
   .w-50 {
     width: calc(50% - 20px);
   }
+
   .mat-radio-button {
     margin-left: 10px;
     margin-bottom: 10px;
   }
+
   mat-label {
     margin-left: 10px;
   }
+
   button {
     margin-left: 10px;
   }
+
   &.no-space {
     justify-content: start;
   }
+
   &.flex-end {
     justify-content: flex-end;
   }
+
   .valid {
     color: green;
   }
+
   .invalid {
     color: red;
   }
+
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
-  input:-webkit-autofill:active{
+  input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
+  }
+  ::ng-deep.mat-form-field-flex {
+    .mat-form-field-outline {
+      color: #009900;
+    }
   }
 }

@@ -24,17 +24,11 @@
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Username" [formControlName]="'username'">
-          <mat-icon matSuffix
-                    [ngClass]="{'valid': formGroup.get('username')?.valid,
-                     'invalid': formGroup.get('username')?.invalid }"
-                    *ngIf="formGroup.get('username')?.status !== 'PENDING' && formGroup.get('username')?.dirty"
-          >{{ formGroup.get('username')?.valid ? 'check' : 'clear' }}</mat-icon>
-          <mat-progress-spinner
-            *ngIf="formGroup.get('username')?.status === 'PENDING' && formGroup.get('username')?.dirty"
-            color="primary"
-            mode="indeterminate"
-            matSuffix [diameter]="18" style="float: right; margin-left: 8px">
-          </mat-progress-spinner>
+          <mat-icon matSuffix *ngIf="formGroup.get('username')?.dirty" >
+            <app-spinner [diameter]="18"
+                         [status]="formGroup.get('username')?.status"></app-spinner>
+          </mat-icon>
+
           <mat-error>{{ getErrorMessage(formGroup.get('username')) }}</mat-error>
         </mat-form-field>
       </div>
